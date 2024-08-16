@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>CALCULADORA</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="h5.css">
+    </head>
+<body>
+    <ul class="menu">
+        <li><a href="factura.html">FACTURA</a></li>
+        <li><a href="nomina.html">NOMINA</a></li>
+        <li><a href="Calculadora.html">CALCULADORA</a></li>
+        <li><a>Andres Rodruguez<br>
+        <li><a>PAE - 07</a></li>
+    </ul>
+<h1>CALCULADORA</h1>
+    <form>
+        <table>
+            <caption>CALCULADORA</caption>
+            <br>
+            <tr><th>NUMERO 1</th><td><input type="number" id="n01" size="25"></td></tr>
+            <tr><th>NUMERO 2</th><td><input type="number" id="n02" size="25"></td></tr>
+            <tr><th rowspan="4">OPERACIONES</th><td><input type="radio" id="radio1" name="oper" size="25"><center>SUMA</center></td></tr>
+            <tr><td><input type="radio" id="radio2" name="oper" size="25"><center>RESTA</center></td></tr>
+            <tr><td><input type="radio" id="radio3" name="oper" size="25"><center>MULTIPLICACION</center></td></tr>
+            <tr><td><input type="radio" id="radio4" name="oper" size="25"><center>DIVISION</center></td></tr>
+            <tr><th>RESPUESTA</th><td><input type="text" id="r01" size="25"></td></tr>
+            <tr><th><input type="button" id="bot" value="CALCULAR" onclick="operaciones()"></th><th><input type="reset" id="bot" value="BORRAR"></th></tr></table>
+        </table>
+    </form>
+    <script>
+        function operaciones()
+        {
+            let n1,n2,r;
+            n1=document.getElementById('n01').value;
+            n2=document.getElementById('n02').value;
+            n1=parseInt(n1);
+            n2=parseInt(n2);
+
+            if(n1>=0 && n2>=0)
+            {
+                if(document.getElementById('radio1').checked)
+                {
+                    r=n1+n2;
+                    document.getElementById('r01').value=r;
+                }
+                else
+                {
+                    if(document.getElementById('radio2').checked)
+                    {
+                        r=n1-n2;
+                        document.getElementById('r01').value=r;
+                    }
+                    else
+                    {
+                        if(document.getElementById('radio3').checked)
+                        {
+                            r=n1*n2;
+                            document.getElementById('r01').value=r;
+                        }
+                        else
+                        {
+                            if(document.getElementById('radio4').checked)
+                            {
+                                r=n1/n2;
+                                document.getElementById('r01').value=r;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                alert('numeros inferiores o iguales a 0')
+            }
+        }
+    </script>
+</body>
+</html>

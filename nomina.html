@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>NOMINA</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="h5.css">
+    </head>
+<body>
+    <ul class="menu">
+        <li><a href="factura.html">FACTURA</a></li>
+        <li><a href="nomina.html">NOMINA</a></li>
+        <li><a href="Calculadora.html">CALCULADORA</a></li>
+        <li><a>Andres Rodruguez<br>
+        <li><a>PAE - 07</a></li>
+    </ul>
+    <h1>NOMINA</h1>
+    <form>
+        <table>
+            <tr><th>NOMBRE</th><td><input type="text" id="nom" size="25"></td><th>TIPO DE DOCUMENTO</th><th><select id="tp"><option>CC</option><option>CE</option><option>NIT</option></select></th><td>No DOCUMENTO<td><input type="text" size="25"></td></tr>
+
+            <tr><th>CARGO</th><td><input type="text" id="doc" size="25"></td><th>SALARIO</th><td><input type="text" id="sal" size="25"></td><th>SALARIO BASE</th><td><input type="text" id="bas" size="25"></td></tr>
+
+            <tr><th rowspan="2">DIAS TRABAJADOS</th><td rowspan="2"><input type="text" id="dias" size="25"></td><td><input type="radio" id="rad1" name="he" size="25">DIURNAS</td><th rowspan="2">No HORAS</th><td rowspan="2"><input type="text" id="horas" size="25"></td></tr>
+            
+            <tr><td><input type="radio" id="rad2" name="he" size="25">NOCTURNAS</td></tr> 
+            <tr><th>AUXILIO DE TRANSPORTE</th><td><input type="text" id="aux" size="25"></td><td><input type="radio" id="rad3" name="he" size="25">FEST/DOM</td><th>VALOR HORAS</th><td><input type="text" id="vhe" size="25"></td></tr>
+
+            <tr><th colspan="3">TOTAL DEVENGADO</th><td colspan="3"><input type="text" id="tdv" size="25"></td></tr>
+
+            <tr><th colspan="2">SALUD</th><td><input type="text" id="salud" size="25"></td><td colspan="2">PRESTAMOS</td><td><input type="text" id="pre" size="25"></td></tr>
+
+            <tr><th colspan="3">PENSION</th><td colspan="3"><input type="text" id="pen"size="25"></td></tr>
+
+            <tr><th colspan="3">TOTAL DEDUCIDO</th><td colspan="3"><input type="text" id="td"size="25"></td></tr>
+
+            <tr><th colspan="3">NETO A PAGAR</th><td colspan="3"><input type="text" id="net" size="25"></td></tr>
+
+            <tr><th colspan="3"><input type="button" value="SELECCIONAR" onclick="calcular()"></th><th colspan="3"><input type="reset" value="BORRAR"></th></tr>
+        </table>
+    </form>
+    <script>
+        function calcular()
+        {
+            let salario,dias,base,auxilio,ch,vh,salud,pen,pre,tdv,tdd,neto;
+            salario=document.getElementById('sal').value;
+            dias=document.getElementById('dias').value
+            ch=document.getElementById('horas').value;
+            pre=parseFloat(document.getElementById('pre').value);
+            ch=parseFloat(ch);
+            base=(salario/30)*dias;
+
+            document.getElementById('bas').value=base;
+            if(salario<=2000000)
+            {
+                auxilio=(117172/30)*dias;
+                document.getElementById('aux').value=auxilio;
+            }
+            else
+            {
+                document.getElementById('aux').value=0;
+            }
+            if(document.getElementById('rad1').checked)
+            {
+                let=hnormal=salario/240;
+                let hextrad=hnormal*1.25;
+                vh=ch*hextrad;
+                document.getElementById('vhe').value=vh;
+            }
+            if(document.getElementById('rad2').checked)
+            {
+                let=hnormal=salario/240
+                let hextrad=hnormal*1.75;
+                vh=ch*hextrad;
+                document.getElementById('vhe').value=vh;
+            }
+            if(document.getElementById('rad3').checked)
+            {
+                let=hnormal=salario/240
+                let hextrad=hnormal*2.00;
+                vh=ch*hextrad;
+                document.getElementById('vhe').value=vh;
+            }
+            
+            tdv=base+auxilio+vh;
+            document.getElementById('tdv').value=tdv;
+
+            salud=(tdv-auxilio)*0.04;
+            document.getElementById('salud').value=salud;
+
+            pen=(tdv-auxilio)*0.04;
+            document.getElementById('pen').value=pen;
+            
+            tdd=salud+pre+pen;
+            document.getElementById('td').value=tdd;
+
+            neto=tdv-tdd;
+            document.getElementById('net').value=neto;
+        }
+    </script>
+</body> 
+</html>

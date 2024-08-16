@@ -1,0 +1,128 @@
+<!DOCTYPE Html>
+<head>
+    <title>FACTURA</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="h5.css">
+</head>
+<body>
+    <ul class="menu">
+        <li><a href="factura.html">FACTURA</a></li>
+        <li><a href="nomina.html">NOMINA</a></li>
+        <li><a href="Calculadora.html">CALCULADORA</a></li>
+        <li><a>Andres Rodruguez<br>
+        <li><a>PAE - 07</a></li>
+    </ul>
+    <h1>FACTURA DE VENTA</h1>
+<form>
+    <table>
+        <tr><th>NOMBRE</th><td><input type="text" id="nomb" size="25"></td><th>TIPO DE DOCUMENTO</th><th><select id="td"><option value="CC">CC</option><option value="CE">CE</option><option value="NIT">NIT</option></select></th><td>No DOCUMENTO<td><input type="text" id="doc" size="25"></td></tr>
+        <tr><th>DIRECION</th><td><input type="text" id="dir" size="25"></td><th>TELEFONO</th><td><input type="text" id="tel" size="25"></td><th>EMPLEADO</th><td><input type="text" id="emp" size="25"></td></tr>
+        <tr><th>REFERENCIA</th><th>DESCRIPCION</th><th>CANTIDAD</th><th>VALOR UNITARIO</th><th colspan="2">VALOR TOTAL</th></tr>
+            <!---primer producto--> 
+            <tr><th><select id="prod1"><option value="15000">Correa Perro Pequeño </option><option value="18000">Hueso Adiestrado</option><option value="85000">Cama Perro Pequeño </option>></select></th><th colspan="2"><input type="text" id="desc1" size="30"></th><th><input type="text" id="cant1" size="10"></th><th><input type="text" id="vu1" size="15"></th><th><input type="text" id="vt1" size="15"></th></tr>    
+            <!---segundo producto--> 
+            <tr><th><select id="prod2"><option value="15000">Correa Perro Pequeño </option><option value="18000">Hueso Adiestrado</option><option value="85000">Cama Perro Pequeño </option>></select></th><th colspan="2"><input type="text" id="desc2" size="30"></th><th><input type="text" id="cant2" size="10"></th><th><input type="text" id="vu2" size="15"></th><th><input type="text" id="vt2" size="15"></th></tr> 
+            <!---tercer producto--> 
+            <tr><th><select id="prod3"><option value="15000">Correa Perro Pequeño </option><option value="18000">Hueso Adiestrado</option><option value="85000">Cama Perro Pequeño </option>></select></th><th colspan="2"><input type="text" id="desc3" size="30"></th><th><input type="text" id="cant3" size="10"></th><th><input type="text" id="vu3" size="15"></th><th><input type="text" id="vt3" size="15"></th></tr> 
+        <tr><th rowspan="4">Metodo de pago</th><td><input type="radio" id="fp01" name="fp" size="25">EFECTIVO</td><th colspan="2">SUBTOTAL</th><td colspan="2"><input type="text" id="tot" size="25"></td>
+        <tr><td><input type="radio" id="fp02" name="fp">CHEQUE</td><th colspan="2">IVA</th><td colspan="2"><input type="text" id="iva"size="25"></td></tr>
+        <tr><td rowspan="2"><input type="radio" id="fp03" name="fp">TARJETA</td><th colspan="2">DESCUENTO</th><td colspan="2"><input type="text" id="desc" size="25"></td></tr>
+        <th colspan="2">NETO</th><td colspan="2"><input type="text" id="net" size="25"></td></tr>
+        <tr><th colspan="3"><input type="button" onclick="calcular()" value="SELECCIONAR"></th><th colspan="3"><input type="reset" value="BORRAR"></th></tr>
+    </table>
+</form>
+    <script>
+        function calcular()
+        {
+            let nombre,tipodoc,tdoc,nodoc,direccion,empleado,telefono,descp1,descp2,descp3,cant1,cant2,cant3,vtt1,vtt2,vtt3,subtotal,iva,descuento,neto;
+            nombre=document.getElementById('nomb').value;
+            nodoc=document.getElementById('doc').value;
+            direccion=document.getElementById('dir').value;
+            empleado=document.getElementById('emp').value;
+            telefono=document.getElementById('tel').value;
+            tipodoc=document.getElementById('td').value;
+
+            let p1=document.getElementById('prod1');
+            cant1=document.getElementById('cant1').value;
+            let v1=p1.options[p1.selectedIndex].value;
+            document.getElementById('vu1').value=v1;
+            document.getElementById('desc1').value=p1.options[p1.selectedIndex].text;
+            cant1=parseInt(cant1);
+            v1=parseInt(v1);
+
+            if(cant1>0)
+            {
+                vtt1=cant1*v1;
+                document.getElementById('vt1').value=vtt1;
+            }
+            else
+            {
+                cant1=0;
+                vtt1=0;
+                document.getElementById('vt1').value=vtt1;
+            }
+            let p2=document.getElementById('prod2');
+            cant2=document.getElementById('cant2').value;
+            let v2=p2.options[p2.selectedIndex].value;
+            document.getElementById('vu2').value=v2;
+            document.getElementById('desc2').value=p2.options[p2.selectedIndex].text;
+            cant2=parseInt(cant2);
+            v2=parseInt(v2);
+
+            if(cant2>0)
+            {   
+                vtt2=cant2*v2;
+                document.getElementById('vt2').value=vtt2;
+            }
+            else
+            {
+                cant2=0;
+                vtt2=0;
+                document.getElementById('vt2').value=vtt2;
+            }
+
+            let p3=document.getElementById('prod3');
+            cant3=document.getElementById('cant3').value;
+            let v3=p3.options[p3.selectedIndex].value;
+            document.getElementById('vu3').value=v1;
+            document.getElementById('desc3').value=p1.options[p3.selectedIndex].text;
+            cant3=parseInt(cant3);
+            v3=parseInt(v3);
+
+            if(cant3>0)
+            {   
+                vtt3=cant3*v3;
+                document.getElementById('vt3').value=vtt3;
+            }
+            else
+            {
+                cant3=0;
+                vtt3=0;
+                document.getElementById('vt3').value=vtt3;
+            }
+
+            subtotal=vtt1+vtt2+vtt3;
+            document.getElementById('tot').value=subtotal;
+            iva=subtotal*19/100;
+            document.getElementById('iva').value=iva;
+            if(document.getElementById('fp01').checked)
+            {
+                descuento=subtotal*10/100;
+                document.getElementById('desc').value=descuento;
+            }
+            if(document.getElementById('fp02').checked)
+            {
+                descuento=subtotal*5/100;
+                document.getElementById('desc').value=descuento;
+            }
+            if(document.getElementById('fp03').checked)
+            {
+                descuento=subtotal*2/100;
+                document.getElementById('desc').value=descuento;
+            }
+            neto=subtotal+iva-descuento;
+            document.getElementById('net').value=neto; 
+        }
+</script>
+</body>
+</html>
